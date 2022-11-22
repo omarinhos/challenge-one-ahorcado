@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Ahorcado</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header class="header">
+        <a href="#"><img src="images/logo.svg" alt="logo"></a>
+    </header>
+
+    <section class="botones">
+        <button id="iniciar-juego" class="btn principal">Iniciar juego</button>
+        <button id="agregar-palabra" class="btn secundario">Agregar nueva palabra</button>
+    </section>
+
+    <section class="ingresar-palabra">
+        <textarea id="txt-palabra" cols="30" rows="1" maxlength="8" required placeholder="Ingrese una palabra"></textarea>
+        <div class="max-letras">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-exclamation-circle-fill" viewBox="0 0 16 16">
+                <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8 4a.905.905 0 0 0-.9.995l.35 3.507a.552.552 0 0 0 1.1 0l.35-3.507A.905.905 0 0 0 8 4zm.002 6a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"/>
+              </svg><p> Máx. de 8 letras</p>
+        </div>
+        <div class="ingresar-palabra-botones">
+            <button id="guardar-empezar" class="btn principal">Guardar y empezar</button>
+            <button id="cancelar" class="btn secundario">Cancelar</button>
+        </div>
+    </section>
+
+    <main class="juego">
+        <canvas id="canva" width="200" height="200" ></canvas>
+        <div class="flex" id="words">
+
+        </div>
+        <div class="incorrectas">
+            <p id="palabras-incorrectas"></p>
+        </div>
+        <div class="juego-botones">
+            <button id="nuevo-juego" class="btn principal">Nuevo juego</button>
+            <button id="desistir" class="btn secundario">Desistir</button>
+        </div>
+    </main>
+
+    <script src="app.js"></script>
+
+</body>
+
+</html>
