@@ -23,15 +23,6 @@ img {
     margin-top: 20px;
 }
 
-.botones {
-    width: 80%;
-    height: 85%;
-    display: flex;
-    flex-direction: column;
-    margin: 210px auto;
-    justify-content: space-between;
-}
-
 .btn {
     border-radius: 24px;
     padding: 24px;
@@ -51,6 +42,17 @@ img {
     color: var(--boton-principal);
 }
 
+/* Pantalla de inicio */
+.botones {
+    width: 80%;
+    height: 85%;
+    display: flex;
+    flex-direction: column;
+    margin: 210px auto;
+    justify-content: space-between;
+}
+
+/* Section Ingresar palabra */
 .ingresar-palabra {
     display: none;
     width: 85%;
@@ -95,6 +97,58 @@ img {
     justify-content: space-around;
 }
 
+/* Section juego*/
 .juego {
     display: none;
+    width: 85%;
+    height: 100%;
+    flex-direction: column;
+    margin: 20px auto;
+    justify-content: flex-end;
+}
+
+#canva {
+    flex: 1;
+    height: 35%;
+}
+
+.flex {
+    display: flex;
+    height: 10%;
+    justify-content: center;
+}
+
+#words {
+    display: flex;
+}
+
+span.linea {
+    width: 35px;
+    height: 40px;
+    margin: 5px;
+    border-bottom: 3px solid var(--boton-principal);
+    color: var(--boton-principal);
+    font-size: 24px;
+} 
+
+.incorrectas {
+    height: 15%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.incorrectas p {
+    color: var(--letras-gris);
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 150%;
+    text-align: center;
+}
+
+.juego-botones {
+    display: flex;
+    flex-direction: column;
+    height: 30%;
+    justify-content: space-around;
 }
