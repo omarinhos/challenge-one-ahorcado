@@ -5,13 +5,20 @@ const txtPalbra = document.getElementById('txt-palabra')
 const btnGuardarYEmpezar = document.getElementById('guardar-empezar')
 const btnCancelar = document.getElementById('cancelar')
 
+const canvas = document.getElementById('canva')
 const btnNuevoJuego = document.getElementById('nuevo-juego')
 const btnDesistir = document.getElementById('desistir')
 const lineas = document.getElementById('words')
+const letrasIncorrectas = document.getElementById('palabras-incorrectas')
+const input = document.getElementById('input-movil')
+
 
 const palabras = ["LENGUAJE", "CODIGO", "LIBRERIA", "BUG", "DOMINIO", "HOSTING", "SCRUM", "FRONTEND", "BACKEND", "MOVIL", "LINUX", "JAVA", "HTML", "CSS"]
+let palabraEnJuego = []
+let palabraEnJuegoAux = []
 let intentos = 10
 let letrasEquivocadas = []
+const pattern = new RegExp('^[A-Z]+$', 'i')
 
 btnIniciarJuegp.addEventListener("click", iniciarJuego)
 
@@ -24,6 +31,18 @@ btnCancelar.addEventListener("click", cancelar)
 btnNuevoJuego.addEventListener("click", nuevoJuego)
 
 btnDesistir.addEventListener("click", desistir)
+
+input.addEventListener('input', (event) => {
+    getTeclaPulsada(event.data)
+    input.value = ""
+})
+
+document.addEventListener('keydown', (event) => {
+    if (!((event.keyCode != 32) && (event.keyCode < 65) || (event.keyCode > 90) && (event.keyCode < 97) || (event.keyCode > 122))){
+    getTeclaPulsada(event.key)     
+    }
+}, false);
+
 
 function iniciarJuego() {
     document.querySelector('.botones').style.display = "none";
@@ -49,12 +68,12 @@ function cancelar() {
 }
 
 function nuevoJuego() {
-    //const letrasIncorrectas = document.getElementById('palabras-incorrectas')
-    //letrasIncorrectas.innerHTML += "A "
+    letrasIncorrectas.innerHTML = ""
     lineas.innerHTML = ""
     letrasEquivocadas = []
 
-    let palabraEnJuego = escogerPalabra().split("")
+    palabraEnJuego = escogerPalabra().split("")
+    palabraEnJuegoAux = []
     console.log(palabraEnJuego)
 
     let i = 0
@@ -70,10 +89,45 @@ function nuevoJuego() {
 
 function escogerPalabra() {
     let indexRandom = Math.floor(Math.random() * (palabras.length));
-    return palabras[indexRandom] 
+    return palabras[indexRandom]
 }
 
 function desistir() {
     document.querySelector('.botones').style.display = "flex";
     document.querySelector('.juego').style.display = "none";
+    nuevoJuego()
+}
+
+function getTeclaPulsada(tecla) {
+    const letra = tecla.toUpperCase()
+
+    let i = 0
+    if (palabraEnJuego.indexOf(letra) >= 0) {
+        
+        let index = palabraEnJuego.indexOf(letra)
+        while (index !== -1) {
+            palabraEnJuegoAux[index] = letra
+            index = palabraEnJuego.indexOf(letra, index + 1)
+        }
+        console.log(palabraEnJuegoAux)
+
+        palabraEnJuego.forEach(e => {
+            if (e == letra) {
+                document.getElementById('linea' + i).innerHTML = letra
+            }
+            i++
+        })
+    } else {
+        intentos--
+
+        if (letrasEquivocadas.indexOf(letra) < 0) {
+            letrasEquivocadas[letrasEquivocadas.length] = letra
+            letrasIncorrectas.innerHTML = letrasEquivocadas.join(" ").toString()
+        }
+    }
+
+    if (palabraEnJuego.join("") === palabraEnJuegoAux.join("")) {
+        console.log("win")
+    }
+
 }
