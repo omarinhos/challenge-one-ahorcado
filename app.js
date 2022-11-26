@@ -11,6 +11,8 @@ const btnDesistir = document.getElementById('desistir')
 const lineas = document.getElementById('words')
 const letrasIncorrectas = document.getElementById('palabras-incorrectas')
 const input = document.getElementById('input-movil')
+const msgGanaste = document.getElementById('ganaste')
+const msgPerdiste = document.getElementById('perdiste')
 
 
 const palabras = ["LENGUAJE", "CODIGO", "LIBRERIA", "BUG", "DOMINIO", "HOSTING", "SCRUM", "FRONTEND", "BACKEND", "MOVIL", "LINUX", "JAVA", "HTML", "CSS"]
@@ -18,7 +20,7 @@ let palabraEnJuego = []
 let palabraEnJuegoAux = []
 let intentos = 10
 let letrasEquivocadas = []
-const pattern = new RegExp('^[A-Z]+$', 'i')
+let juegoTerminado = false;
 
 btnIniciarJuegp.addEventListener("click", iniciarJuego)
 
@@ -38,8 +40,8 @@ input.addEventListener('input', (event) => {
 })
 
 document.addEventListener('keydown', (event) => {
-    if (!((event.keyCode != 32) && (event.keyCode < 65) || (event.keyCode > 90) && (event.keyCode < 97) || (event.keyCode > 122))){
-    getTeclaPulsada(event.key)     
+    if (!((event.keyCode != 32) && (event.keyCode < 65) || (event.keyCode > 90) && (event.keyCode < 97) || (event.keyCode > 122))) {
+        getTeclaPulsada(event.key)
     }
 }, false);
 
@@ -68,8 +70,13 @@ function cancelar() {
 }
 
 function nuevoJuego() {
+    juegoTerminado = false
+    intentos = 10
     letrasIncorrectas.innerHTML = ""
     lineas.innerHTML = ""
+    msgGanaste.style.display = "none"
+    msgPerdiste.style.display = "none"
+    input.style.display = "block"
     letrasEquivocadas = []
 
     palabraEnJuego = escogerPalabra().split("")
@@ -99,35 +106,47 @@ function desistir() {
 }
 
 function getTeclaPulsada(tecla) {
-    const letra = tecla.toUpperCase()
+    if (!juegoTerminado || intentos > 0) {
+        const letra = tecla.toUpperCase()
 
-    let i = 0
-    if (palabraEnJuego.indexOf(letra) >= 0) {
-        
-        let index = palabraEnJuego.indexOf(letra)
-        while (index !== -1) {
-            palabraEnJuegoAux[index] = letra
-            index = palabraEnJuego.indexOf(letra, index + 1)
-        }
-        console.log(palabraEnJuegoAux)
+        let i = 0
+        if (palabraEnJuego.indexOf(letra) >= 0) {
 
-        palabraEnJuego.forEach(e => {
-            if (e == letra) {
-                document.getElementById('linea' + i).innerHTML = letra
+            let index = palabraEnJuego.indexOf(letra)
+            while (index !== -1) {
+                palabraEnJuegoAux[index] = letra
+                index = palabraEnJuego.indexOf(letra, index + 1)
             }
-            i++
-        })
-    } else {
-        intentos--
+            console.log(palabraEnJuegoAux)
 
-        if (letrasEquivocadas.indexOf(letra) < 0) {
-            letrasEquivocadas[letrasEquivocadas.length] = letra
-            letrasIncorrectas.innerHTML = letrasEquivocadas.join(" ").toString()
+            palabraEnJuego.forEach(e => {
+                if (e == letra) {
+                    document.getElementById('linea' + i).innerHTML = letra
+                }
+                i++
+            })
+        } else {
+           
+            if (letrasEquivocadas.indexOf(letra) < 0) {
+                intentos--
+                console.log(intentos)
+                letrasEquivocadas[letrasEquivocadas.length] = letra
+                letrasIncorrectas.innerHTML = letrasEquivocadas.join(" ").toString()
+            }
+        }
+
+        if (palabraEnJuego.join("") === palabraEnJuegoAux.join("")) {
+            juegoTerminado = true
+            input.style.display = "none"
+            msgGanaste.style.display = "block"
+        }
+
+        if (intentos == 0) {
+            juegoTerminado = true
+            input.style.display = "none"
+            msgPerdiste.style.display = "block"
         }
     }
 
-    if (palabraEnJuego.join("") === palabraEnJuegoAux.join("")) {
-        console.log("win")
-    }
 
 }
