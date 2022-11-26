@@ -14,6 +14,10 @@ const input = document.getElementById('input-movil')
 const msgGanaste = document.getElementById('ganaste')
 const msgPerdiste = document.getElementById('perdiste')
 
+let myCanva = canvas.getContext("2d")
+myCanva.fillStyle = "#0A3871"
+myCanva.strokeStyle = "#0A3871"
+
 
 const palabras = ["LENGUAJE", "CODIGO", "LIBRERIA", "BUG", "DOMINIO", "HOSTING", "SCRUM", "FRONTEND", "BACKEND", "MOVIL", "LINUX", "JAVA", "HTML", "CSS"]
 let palabraEnJuego = []
@@ -21,6 +25,7 @@ let palabraEnJuegoAux = []
 let intentos = 10
 let letrasEquivocadas = []
 let juegoTerminado = false;
+let enJuego = true;
 
 btnIniciarJuegp.addEventListener("click", iniciarJuego)
 
@@ -49,6 +54,7 @@ document.addEventListener('keydown', (event) => {
 function iniciarJuego() {
     document.querySelector('.botones').style.display = "none";
     document.querySelector('.juego').style.display = "flex";
+    nuevoJuego()
 }
 
 function agregarPalabraSection() {
@@ -60,8 +66,8 @@ function agregarPalabra() {
     let nuevaPalabra = txtPalbra.value.toUpperCase()
     if (nuevaPalabra != "") {
         palabras.push(nuevaPalabra)
+        cancelar()
     }
-    console.log(palabras)
 }
 
 function cancelar() {
@@ -78,6 +84,7 @@ function nuevoJuego() {
     msgPerdiste.style.display = "none"
     input.style.display = "block"
     letrasEquivocadas = []
+    myCanva.clearRect(0, 0, canvas.width, canvas.height)
 
     palabraEnJuego = escogerPalabra().split("")
     palabraEnJuegoAux = []
@@ -102,7 +109,6 @@ function escogerPalabra() {
 function desistir() {
     document.querySelector('.botones').style.display = "flex";
     document.querySelector('.juego').style.display = "none";
-    nuevoJuego()
 }
 
 function getTeclaPulsada(tecla) {
@@ -130,6 +136,7 @@ function getTeclaPulsada(tecla) {
             if (letrasEquivocadas.indexOf(letra) < 0) {
                 intentos--
                 console.log(intentos)
+                dibujarAhoracado(intentos)
                 letrasEquivocadas[letrasEquivocadas.length] = letra
                 letrasIncorrectas.innerHTML = letrasEquivocadas.join(" ").toString()
             }
@@ -148,5 +155,54 @@ function getTeclaPulsada(tecla) {
         }
     }
 
+}
 
+function dibujarAhoracado(n) {
+    myCanva.beginPath()
+    switch(n) {
+        case 9: 
+            myCanva.fillRect(0, 190, 200, 10)
+            break
+        case 8:
+            myCanva.fillRect(40,0,10,200);
+            break
+        case 7: 
+            myCanva.fillRect(40,0,80,10);
+            break
+        case 6:
+            myCanva.fillRect(110,0,10,40);
+            break
+        case 5:
+            myCanva.lineWidth = 8;
+            myCanva.arc(114, 58, 20, 0, 2 * Math.PI);
+            myCanva.stroke();
+            break
+        case 4: 
+            myCanva.fillRect(110,80,10,40);
+            break
+        case 3: 
+            myCanva.beginPath();
+            myCanva.moveTo(114, 118);
+            myCanva.lineTo(90, 150);
+            myCanva.stroke();
+            break
+        case 2:
+            myCanva.beginPath();
+            myCanva.moveTo(114, 118);
+            myCanva.lineTo(134, 150);
+            myCanva.stroke();
+            break
+        case 1: 
+            myCanva.beginPath();
+            myCanva.moveTo(114, 80);
+            myCanva.lineTo(90, 100);
+            myCanva.stroke();
+            break
+        case 0: 
+            myCanva.beginPath();
+            myCanva.moveTo(114, 80);
+            myCanva.lineTo(134, 100);
+            myCanva.stroke();
+            break 
+    }
 }

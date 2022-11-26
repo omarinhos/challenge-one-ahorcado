@@ -148,6 +148,8 @@ span.linea {
 #input-movil {
     height: 5%;
     text-align: center;
+    border: none;
+    background-color: transparent;
 }
 
 #ganaste {
