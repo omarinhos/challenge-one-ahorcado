@@ -11,7 +11,6 @@ body {
     background-color: var(--color-fondo);
     height: 100%;
     margin: 0;
-
 }
 
 .header {
@@ -108,13 +107,14 @@ img {
 }
 
 #canva {
-    height: 40%;
+    height: 50%;
 }
 
 .flex {
     display: flex;
-    height: 10%;
+    height: 5%;
     justify-content: center;
+    text-align: center;
 }
 
 #words {
@@ -128,13 +128,14 @@ span.linea {
     border-bottom: 3px solid var(--boton-principal);
     color: var(--boton-principal);
     font-size: 24px;
-} 
+}
 
 .incorrectas {
     height: 10%;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    margin: 0;
 }
 
 .incorrectas p {
@@ -145,8 +146,12 @@ span.linea {
     text-align: center;
 }
 
-#input-movil {
+.teclado {
     height: 5%;
+    margin: auto;
+}
+
+#input-movil {
     text-align: center;
     border: none;
     background-color: transparent;
@@ -173,4 +178,60 @@ span.linea {
     flex-direction: column;
     height: 25%;
     justify-content: space-around;
+}
+
+@media (min-width: 1024px) {
+
+    .botones {
+        width: 45%;
+        height: 85%;
+        display: flex;
+        flex-direction: column;
+        margin: 15% auto;
+        justify-content: space-between;
+    }
+
+    .ingresar-palabra {
+        display: none;
+        width: 60%;
+        height: 85%;
+        flex-direction: column;
+        margin: 20px auto;
+        justify-content: flex-end;
+    }
+
+    .ingresar-palabra-botones {
+        display: flex;
+        flex-direction: row;
+        height: 15%;
+        justify-content: space-between;
+    }
+
+    .ingresar-palabra-botones .btn{
+        width: 48%;
+    }
+
+    .juego {
+        display: none;
+        width: 30%;
+        height: 85%;
+        flex-direction: column;
+        margin: 20px auto;
+        justify-content: space-between;
+    }
+ 
+    .juego-botones {
+        display: flex;
+        flex-direction: row;
+        height: 12.5%;
+        justify-content: space-between;
+    }
+
+    .juego-botones .btn{
+        width: 48%;
+    }
+
+    .teclado {
+        display: none;
+    }
 }

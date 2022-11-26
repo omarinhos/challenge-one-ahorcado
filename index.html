@@ -20,11 +20,15 @@
     </section>
 
     <section class="ingresar-palabra">
-        <textarea id="txt-palabra" cols="30" rows="1" maxlength="8" required placeholder="Ingrese una palabra"></textarea>
+        <textarea id="txt-palabra" cols="30" rows="1" maxlength="8" required
+            placeholder="Ingrese una palabra"></textarea>
         <div class="max-letras">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-exclamation-circle-fill" viewBox="0 0 16 16">
-                <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8 4a.905.905 0 0 0-.9.995l.35 3.507a.552.552 0 0 0 1.1 0l.35-3.507A.905.905 0 0 0 8 4zm.002 6a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"/>
-              </svg><p> Máx. de 8 letras</p>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                class="bi bi-exclamation-circle-fill" viewBox="0 0 16 16">
+                <path
+                    d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8 4a.905.905 0 0 0-.9.995l.35 3.507a.552.552 0 0 0 1.1 0l.35-3.507A.905.905 0 0 0 8 4zm.002 6a1 1 0 1 0 0 2 1 1 0 0 0 0-2z" />
+            </svg>
+            <p> Máx. de 8 letras</p>
         </div>
         <div class="ingresar-palabra-botones">
             <button id="guardar-empezar" class="btn principal">Guardar y empezar</button>
@@ -33,14 +37,16 @@
     </section>
 
     <main class="juego">
-        <canvas id="canva" width="200" height="200" ></canvas>
+        <canvas id="canva" width="200" height="200"></canvas>
         <div class="flex"">
-            <div class="box-words" id="words"></div>
+            <div class=" box-words" id="words"></div>
         </div>
         <div class="incorrectas">
             <p id="palabras-incorrectas"></p>
         </div>
-        <input type="text" id="input-movil" placeholder="Click para abrir el teclado">
+        <div class="teclado">
+            <input type="text" id="input-movil" placeholder="Click para abrir el teclado">
+        </div>
         <span id="ganaste">Ganaste, felicidades</span>
         <span id="perdiste">Fin del juego</span>
         <div class="juego-botones">
